@@ -11,10 +11,18 @@
 |
 */
 
-Route::get('/','HomeController@index');
+Route::get('/','WelcomeController@index');
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('perfil',function(){
-    return view('perfil');
+
+
+Route::group(['middleware'=>'auth'],function(){
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/perfil','PerfilController@index')->name('perfil');
+
+    Route::group(['prefix'=>'escuela/personal','namespace'=>'Escuela','middleware'=>['role:director']],function(){
+        Route::resource('docentes','DocenteController');
+    });
+
 });

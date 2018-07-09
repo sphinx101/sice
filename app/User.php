@@ -28,6 +28,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token','created_at','updated_at'
     ];
+
+    //******************************* R E L A C I O N E S ********************************88
+    public function docente(){
+        return $this->hasOne('sice\Models\Docente');
+    }
 }

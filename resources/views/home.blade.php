@@ -3,9 +3,13 @@
 @section('title', 'SiCe')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Principal</h1>
 @stop
 
 @section('content')
-    <p>You are logged in!</p>
+    <p>Pagina Principal</p>
 @stop
+
+@push('js')
+
+@endpush

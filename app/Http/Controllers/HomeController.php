@@ -3,17 +3,22 @@
 namespace sice\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use sice\Repositorios\DocenteRepo;
 
 class HomeController extends Controller
 {
+    private $docenteRepo;
+
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
+    public function __construct(DocenteRepo $docenteRepo){
+        //$this->middleware('auth');
+        $this->docenteRepo=$docenteRepo;
     }
 
     /**
@@ -21,8 +26,14 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('home');
+    public function index(Request $request)
+    {   $vista='perfil';
+
+        $booDocenteRegistrado=$this->docenteRepo->booUsuarioDocenteRegistrado(Auth::id());
+        if($booDocenteRegistrado)
+           $vista='home';
+
+
+        return view($vista);
     }
 }

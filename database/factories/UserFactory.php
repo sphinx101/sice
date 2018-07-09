@@ -17,6 +17,10 @@ $factory->define(sice\User::class, function (Faker $faker) {
     return [
         'username' => $faker->unique()->userName,
         'email' => $faker->unique()->safeEmail,
+        'type' =>\sice\Models\Role::query()
+                  ->where('name',$faker->randomElement($array=array('director','docente')))
+                  ->first()
+                  ->name,
         'password' => bcrypt('123456'), // secret
         'remember_token' => str_random(10),
     ];

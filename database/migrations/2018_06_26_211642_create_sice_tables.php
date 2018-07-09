@@ -16,6 +16,7 @@ class CreateSiceTables extends Migration
               $table->increments('id');
               $table->string('cct')->unique();
               $table->string('nombre');
+
               $table->timestamps();
               $table->softDeletes();
           });
@@ -71,6 +72,8 @@ class CreateSiceTables extends Migration
               $table->increments('id');
               $table->integer('centrotrabajo_id')->unsigned();
               $table->foreign('centrotrabajo_id')->references('id')->on('centrotrabajos')->onUpdate('cascade');
+              $table->integer('user_id')->unsigned();
+              $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
               $table->string('curp',18)->unique();
               $table->string('nombre');
               $table->string('appaterno');
@@ -143,6 +146,8 @@ class CreateSiceTables extends Migration
           Schema::create('alumno_padretutor',function(Blueprint $table){
               $table->integer('alumno_id')->unsigned();
               $table->foreign('alumno_id')->references('id')->on('alumnos')->onDelete('cascade')->onUpdate('cascade');
+              $table->integer('padretutor_id')->unsigned();
+              $table->foreign('padretutor_id')->references('id')->on('padretutores')->onDelete('cascade')->onUpdate('cascade');
               $table->integer('parentesco_id')->unsigned();
               $table->foreign('parentesco_id')->references('id')->on('parentescos')->onDelete('cascade')->onUpdate('cascade');
 
@@ -183,6 +188,7 @@ class CreateSiceTables extends Migration
               $table->integer('periodo_id')->unsigned();
               $table->foreign('periodo_id')->references('id')->on('periodos')->onUpdate('cascade'); //periodos-calificaciones
               $table->integer('niveles_id')->unsigned();
+              $table->foreign('niveles_id')->references('id')->on('niveles')->onUpdate('cascade');  //niveles-calificaciones
               //$table->integer('tarea_id')->unsigned();
               //$table->foreign('tarea_id')->references('id')->on('tareas')->onUpdate('cascade'); //tareas-calificaciones
               $table->integer('cal_tarea')->unsigned();

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
+
 class UsersTableSeeder extends Seeder
 {
     /**
@@ -11,6 +12,11 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(sice\User::class,10)->create();
+        factory(sice\User::class,10)->create()->each(function($u){
+            $rol=\sice\Models\Role::where('name',$u->type)->get();
+            $u->attachRole($rol[0]);
+        });
+
+
     }
 }
