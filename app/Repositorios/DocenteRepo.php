@@ -9,6 +9,8 @@
 namespace sice\Repositorios;
 
 
+use Illuminate\Support\Facades\Auth;
+use sice\Models\Docente;
 use sice\User;
 
 class DocenteRepo{
@@ -20,6 +22,11 @@ class DocenteRepo{
            $existe=true;
        return $existe;
    }
+
+    public function store($data){
+
+        return Docente::create($data->all());
+    }
 
 
 }

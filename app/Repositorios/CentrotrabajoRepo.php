@@ -27,4 +27,11 @@ class CentrotrabajoRepo{
         return $datos;
     }
 
+    public function pluckCCT(){
+        return  Centrotrabajo::pluck('cct','id');
+    }
+    public function pluckNombreCentrotrabajo(){
+        return Centrotrabajo::pluck('nombre','id');
+    }
+
 }

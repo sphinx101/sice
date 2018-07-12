@@ -63,7 +63,7 @@
                                         <!-- The user image in the navbar-->
                                         <img src="{{asset('images/profile/viar78.jpg')}}" class="user-image" alt="User Image">
                                         <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                        <span class="hidden-xs">Reynaldo Victor Arceo</span>
+                                        <span class="hidden-xs">{{Auth::user()->username}}</span>
                                     </a>
                                     <ul class="dropdown-menu">
                                         <!-- The user image in the menu -->
@@ -71,7 +71,9 @@
                                             <img src="{{asset('images/profile/viar78.jpg')}}" class="img-circle" alt="User Image">
 
                                             <p>
-                                                Reynaldo Victor Arceo
+
+                                                {{(Auth::user()->docente != null) ? ucwords(Auth::user()->docente->nombre_completo) : 'Docente no Registrado'}}
+
                                                 <small><strong>{{strtoupper(Auth::user()->type)}}</strong></small>
                                             </p>
                                         </li>
@@ -94,7 +96,7 @@
                                         <!-- Botones Perfil y Cerrar -->
                                         <li class="user-footer">
                                             <div class="pull-left">
-                                                <a href="{{url('/perfil')}}" class="btn btn-default btn-flat">{{trans('adminlte::adminlte.profile')}}</a>
+                                                <a href="{{url('/escuela/personal/perfil')}}" class="btn btn-default btn-flat">{{trans('adminlte::adminlte.profile')}}</a>
                                             </div>
                                             <div class="pull-right">
 
@@ -135,16 +137,20 @@
         <!-- Left side column. contains the logo and sidebar -->
         <aside class="main-sidebar">
 
-            <!-- sidebar: style can be found in sidebar.less -->
-            <section class="sidebar">
+            @if(Auth::user()->docente!=null)
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
 
-                <!-- Sidebar Menu -->
-                <ul class="sidebar-menu" data-widget="tree">
-                    @each('adminlte::partials.menu-item', $adminlte->menu(), 'item')
-                </ul>
-                <!-- /.sidebar-menu -->
-            </section>
-            <!-- /.sidebar -->
+                    <!-- Sidebar Menu -->
+                    <ul class="sidebar-menu" data-widget="tree">
+                        @each('adminlte::partials.menu-item', $adminlte->menu(), 'item')
+                    </ul>
+                    <!-- /.sidebar-menu -->
+                </section>
+                <!-- /.sidebar -->
+            @else
+                @include('flash::message')
+            @endif
         </aside>
         @endif
 

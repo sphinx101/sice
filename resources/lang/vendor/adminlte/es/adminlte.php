@@ -6,7 +6,7 @@ return [
     'username'                    => 'Nombre Usuario',
     'email'                       => 'Email',
     'password'                    => 'Contraseña',
-    'type'                        => ['alumno'=>'Alumno','docente'=>'Docente','director'=>'Director'],
+    'type'                        => ['docente'=>'Docente','director'=>'Director'],
     'retype_password'             => 'Vuelva la contraseña',
     'remember_me'                 => 'Recuérdame',
     'register'                    => 'Registre',

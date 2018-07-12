@@ -2,34 +2,20 @@
 
 namespace sice\Http\Controllers\Escuela;
 
-use sice\Http\Requests\RequestCreateDocente;
-use sice\Http\Requests\RequestEditDocente;
-use sice\Models\Docente;
+use sice\Centrotrabajo;
 use Illuminate\Http\Request;
 use sice\Http\Controllers\Controller;
-use sice\Repositorios\CentrotrabajoRepo;
 
-class DocenteController extends Controller{
-
-
-    private $docenteRepo;
-
-    private $ctRepo;
-
-    function __contruct(DocenteRepo $docenteRepo,CentrotrabajoRepo $ctRepo){
-        $this->docenteRepo=$docenteRepo;
-        $this->ctRepo=$ctRepo;
-    }
-
-
-
+class CentrotrabajoController extends Controller
+{
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
-        return 'index';
+    public function index()
+    {
+        //
     }
 
     /**
@@ -39,8 +25,7 @@ class DocenteController extends Controller{
      */
     public function create()
     {
-
-        return 'vista para dar de alta docentes';
+        //
     }
 
     /**
@@ -49,7 +34,7 @@ class DocenteController extends Controller{
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RequestCreateDocente $request)
+    public function store(Request $request)
     {
         //
     }
@@ -57,44 +42,44 @@ class DocenteController extends Controller{
     /**
      * Display the specified resource.
      *
-     * @param  \sice\Models\Docente  $docente
+     * @param  \sice\Centrotrabajo  $centrotrabajo
      * @return \Illuminate\Http\Response
      */
-    public function show(Docente $docente)
+    public function show(Centrotrabajo $centrotrabajo)
     {
-        dd($docente);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \sice\Models\Docente  $docente
+     * @param  \sice\Centrotrabajo  $centrotrabajo
      * @return \Illuminate\Http\Response
      */
-    public function edit(Docente $docente)
+    public function edit(Centrotrabajo $centrotrabajo)
     {
-        return 'edit';
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \sice\Models\Docente  $docente
+     * @param  \sice\Centrotrabajo  $centrotrabajo
      * @return \Illuminate\Http\Response
      */
-    public function update(RequestEditDocente $request, Docente $docente)
+    public function update(Request $request, Centrotrabajo $centrotrabajo)
     {
-        dd($docente);
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \sice\Models\Docente  $docente
+     * @param  \sice\Centrotrabajo  $centrotrabajo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Docente $docente)
+    public function destroy(Centrotrabajo $centrotrabajo)
     {
         //
     }

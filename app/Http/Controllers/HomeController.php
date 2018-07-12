@@ -4,11 +4,13 @@ namespace sice\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use sice\Repositorios\CentrotrabajoRepo;
 use sice\Repositorios\DocenteRepo;
 
 class HomeController extends Controller
 {
     private $docenteRepo;
+    private $centrotrabajoRepo;
 
 
     /**
@@ -16,9 +18,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct(DocenteRepo $docenteRepo){
+    public function __construct(DocenteRepo $docenteRepo,CentrotrabajoRepo $centrotrabajoRepo){
         //$this->middleware('auth');
         $this->docenteRepo=$docenteRepo;
+        $this->centrotrabajoRepo=$centrotrabajoRepo;
     }
 
     /**
@@ -26,14 +29,19 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {   $vista='perfil';
+    public function index(Request $request){
+
+        $vista='escuela.perfil.create';
 
         $booDocenteRegistrado=$this->docenteRepo->booUsuarioDocenteRegistrado(Auth::id());
-        if($booDocenteRegistrado)
-           $vista='home';
+        $ccts=$this->centrotrabajoRepo->pluckCCT();
+        if($booDocenteRegistrado) {
+            $vista = 'home';
+        }else{
+            $mensaje='Es necesario registrar su informacion Personal para visualizar las opciones del Menu';
+            flash($mensaje)->warning()->important();
+        }
 
-
-        return view($vista);
+        return view($vista,compact('ccts',$ccts));
     }
 }
