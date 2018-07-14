@@ -25,8 +25,8 @@
                 {!! Form::text('localidad',null,array('class'=>'form-control','id'=>'lblLocalidad','placeholder'=>'Introduce  Localidad')) !!}
                 @if($errors->has('localidad'))
                     <span class="help-block">
-                                         <strong>{{$errors->first('localidad')}}</strong>
-                                     </span>
+                         <strong>{{$errors->first('localidad')}}</strong>
+                     </span>
                 @endif
             </div>
             <div class="form-group has-feedback {{$errors->has('municipio')?'has-error':''}}">
@@ -47,6 +47,10 @@
                 {!! Form::label('lblTelefono','Telefono',array('class'=>'sr-only')) !!}
                 {!! Form::text('telefono',null,array('class'=>'form-control','id'=>'lblTelefono','placeholder'=>'Introduce # Tel. Particular')) !!}
             </div>
+
+            @if($booCrearUsuario)
+                @include('escuela.partial.campos-datos-adicionales-docente-usuario-email')
+            @endif
 
             <input type="hidden" name="actualizado" value="1">
 

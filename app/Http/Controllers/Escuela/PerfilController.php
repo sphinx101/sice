@@ -2,18 +2,18 @@
 
 namespace sice\Http\Controllers\Escuela;
 
-use Illuminate\Http\Request;
+
 use sice\Http\Controllers\Controller;
-use sice\Http\Requests\RequestCreateDocente;
-use sice\Repositorios\DocenteRepo;
+use sice\Http\Requests\RequestCreatePerfil;
+use sice\Repositorios\PerfilRepo;
 
 class PerfilController extends Controller{
 
-    private  $docenteRepo;
+    private  $perfilRepo;
 
-    public function __construct(DocenteRepo $docenteRepo){
-          $this->docenteRepo=$docenteRepo;
-    }
+    public function __construct(PerfilRepo $perfilRepo){
+          $this->perfilRepo=$perfilRepo;
+}
 
     public function index(){
 
@@ -21,8 +21,9 @@ class PerfilController extends Controller{
     }
 
 
-    public function store(RequestCreateDocente $request){
-         $this->docenteRepo->store($request);
+    public function store(RequestCreatePerfil $request){
+
+        $this->perfilRepo->store($request);
          flash('Informacion Guardada con Exito!')->success()->important();
          return view('escuela.perfil.index');
     }

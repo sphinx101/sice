@@ -154,13 +154,19 @@ return [
             'role'        => ['docente']
         ],
         [ 'header'  => 'DOCENTE',
-            'role'    => ['director'],
+            'role'    => ['director','supervisor'],
+        ],
+        [
+            'text'=>'Registrar Docente',
+            'url' => 'escuela/personal/docentes/create',
+            'icon' => 'user-plus',
+            'role' => ['supervisor']
         ],
         [
             'text' => 'Datos Generales',
             'url'  => "#",
             'icon' => 'id-card',
-            'role' => ['director']
+            'role' => ['director','supervisor']
         ],
         [
             'text' => 'Aulas Asignadas',
@@ -169,12 +175,20 @@ return [
             'role' => ['director']
         ],
         [
+            'text'=>'Listar Docentes por Escuela',
+            'url'=>'#',
+            'icon'=>'home',
+            'role'=>['supervisor'],
+        ],
+        [
             'text'    => 'Multilevel',
             'icon'    => 'share',
+
             'submenu' => [
                 [
                     'text' => 'Level One',
                     'url'  => '#',
+
                 ],
                 [
                     'text'    => 'Level One',

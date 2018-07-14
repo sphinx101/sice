@@ -8,17 +8,19 @@ use sice\Models\Docente;
 use Illuminate\Http\Request;
 use sice\Http\Controllers\Controller;
 use sice\Repositorios\CentrotrabajoRepo;
+use sice\Repositorios\DocenteRepo;
 
 class DocenteController extends Controller{
 
 
     private $docenteRepo;
 
-    private $ctRepo;
+    private $centrotrabajoRepo;
 
-    function __contruct(DocenteRepo $docenteRepo,CentrotrabajoRepo $ctRepo){
+    public function __construct(DocenteRepo $docenteRepo,CentrotrabajoRepo $centrotrabajoRepo){
+        //$this->middleware('auth');
         $this->docenteRepo=$docenteRepo;
-        $this->ctRepo=$ctRepo;
+        $this->centrotrabajoRepo=$centrotrabajoRepo;
     }
 
 
@@ -37,10 +39,10 @@ class DocenteController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-
-        return 'vista para dar de alta docentes';
+    public function create(){
+        $ccts=$this->centrotrabajoRepo->pluckCCT();
+        $booCrearUsuario=true;
+        return view('escuela.docente.create',compact('ccts',$ccts,'booCrearUsuario',$booCrearUsuario));
     }
 
     /**
@@ -49,16 +51,21 @@ class DocenteController extends Controller{
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RequestCreateDocente $request)
-    {
-        //
+    public function store(RequestCreateDocente $request){
+        $rs=$this->docenteRepo->store($request);
+        if($rs['valor'])
+            flash('Docente Registrado con Exito')->success()->important();
+        else
+            flash($rs['mensaje'])->error()->important();
+
+        return redirect('/escuela/personal/docentes/create');
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \sice\Models\Docente  $docente
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Respons
      */
     public function show(Docente $docente)
     {

@@ -8,8 +8,19 @@
 @stop
 
 @section('content')
+    @include('flash::message')
+    {!! Form::open(['role'=>'form','route'=>'docentes.store']) !!}
+    @include('escuela.partial.box-rfc-curp')
+    @include('escuela.partial.box-datos-personales-docente')
+    @include('escuela.partial.box-datos-adicionales-docente')
 
-    <p>Formulario para dar de alta Docentes</p>
+    <div class="box-footer">
+        <div class="form-group pull-right">
+            {!! Form::submit('Guardar', ['class' => 'btn btn-primary']) !!}
+            {!! Form::close() !!}
+            <a href="{{url('/home')}}" class="btn btn-default" role="button">Regresar</a>
+        </div>
+    </div>
 @stop
 
 @push('js')

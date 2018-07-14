@@ -2,6 +2,7 @@
 
 namespace sice\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use sice\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -35,6 +36,20 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function credentials(Request $request){
+        $login=$request->input($this->username());
+
+        $field=filter_var($login,FILTER_VALIDATE_EMAIL)?'email':'username';
+
+        return[
+            $field=>$login,
+            'password'=>$request->input('password')
+        ];
+    }
+    public function username(){
+        return 'login';
     }
 
 

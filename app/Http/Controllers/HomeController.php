@@ -35,6 +35,7 @@ class HomeController extends Controller
 
         $booDocenteRegistrado=$this->docenteRepo->booUsuarioDocenteRegistrado(Auth::id());
         $ccts=$this->centrotrabajoRepo->pluckCCT();
+        $booCrearUsuario=false;  //Bandera para crear un usuario nuevo cuando se registra un docente por medio del supervisor
         if($booDocenteRegistrado) {
             $vista = 'home';
         }else{
@@ -42,6 +43,6 @@ class HomeController extends Controller
             flash($mensaje)->warning()->important();
         }
 
-        return view($vista,compact('ccts',$ccts));
+        return view($vista,compact('ccts',$ccts,'booCrearUsuario',$booCrearUsuario));
     }
 }

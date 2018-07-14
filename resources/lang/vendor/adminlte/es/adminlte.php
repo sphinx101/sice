@@ -5,6 +5,7 @@ return [
     'full_name'                   => 'Nombre completo',
     'username'                    => 'Nombre Usuario',
     'email'                       => 'Email',
+    'username_email'              => 'Usuario / Correo electronico',
     'password'                    => 'Contraseña',
     'type'                        => ['docente'=>'Docente','director'=>'Director'],
     'retype_password'             => 'Vuelva la contraseña',

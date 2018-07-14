@@ -25,22 +25,24 @@ class Docente extends Model{
                         'municipio',
                         'telefono',
                         'celular',
-                        'actualizado'
+                        'actualizado',
+
     ];
     protected $guarded=['id'];
     protected $hidden=['created_at','updated_at'];
 
     public static $rules=[
                   'centrotrabajo_id'=>'required',
-                  'user_id'=>'required',
-                  'rfc'=>'required|unique:docentes',
-                  'curp'=>'required|unique:docentes',
+
+                  'rfc'=>'required|unique:docentes|min:10|max:13',
+                  'curp'=>'required|unique:docentes|max:18',
                   'nombre'=>'required',
                   'appaterno'=>'required',
                   'apmaterno'=>'required',
                   'domicilio'=>'required',
                   'localidad'=>'required',
                   'municipio'=>'required',
+                  'email'=>'required|string|email|max:255|unique:users',
     ];
 
     //********************************* R E L A C I O N E S *****************************************
