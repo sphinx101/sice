@@ -1,4 +1,4 @@
-<div class="col-md-4">
+<div class="col-md-4 col-md-offset-2">
     <div class="box box-solid box-default">
         <div class="box-header with-border">
             <h3 class="box-title">CCT - RFC - CURP</h3>
@@ -10,6 +10,14 @@
             <!-- /.box-tools -->
         </div>
         <!-- /.box-header -->
+        @if($booCrearUsuario)
+            {!! Form::open(['role'=>'form','route'=>'docentes.store']) !!}
+
+        @else
+            {!! Form::open(['role'=>'form','route'=>'perfil.store']) !!}
+            <input type="hidden" name="user_id" value="{{Auth::id()}}">
+        @endif
+
         <div class="box-body">
 
             <div class="form-group">
@@ -37,11 +45,8 @@
                 @endif
             </div>
 
-
-
-
-
         </div>
 
     </div>
+    @include('escuela.partial.box-datos-personales-docente')
 </div>

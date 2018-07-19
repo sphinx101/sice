@@ -80,6 +80,7 @@ class CreateSiceTables extends Migration
               $table->string('apmaterno');
               $table->string('domicilio');
               $table->string('localidad');
+              $table->string('municipio');
 
               $table->timestamps();
               $table->softDeletes();

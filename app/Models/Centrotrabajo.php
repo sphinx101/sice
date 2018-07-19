@@ -24,7 +24,9 @@ class Centrotrabajo extends Model{
     public function docentes(){
         return $this->hasMany('sice\Models\Docente');
     }
-
+    public function alumnos(){
+        return $this->hasMany('sice\Models\Alumno');
+    }
 
 
     /********************************* Accesores y Mutadores ****************************************/

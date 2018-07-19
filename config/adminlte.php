@@ -158,7 +158,7 @@ return [
         ],
         [
             'text'=>'Registrar Docente',
-            'url' => 'escuela/personal/docentes/create',
+            'route' => 'docentes.create',
             'icon' => 'user-plus',
             'role' => ['supervisor']
         ],
@@ -220,33 +220,59 @@ return [
                 ],
             ],
         ],
-        [ 'header'  => 'INSCRIPCION',
+        [   'header'  => 'INSCRIPCION',
             'role'    => ['director'],
         ],
         [
-            'text'       => 'Registrar Alumno',
-            'icon'       => 'user-plus',
-            'url'        => '#',
-            'role'       => ['director'],
+            'text'      => 'Alumno',
+            'icon'      => 'share',
+            'role'      => ['director'],
+            'submenu'   =>[
+                [
+                    'text'       => 'Registrar',
+                    'icon'       => 'user-plus',
+                    'route'        => 'alumnos.create',
+                    'role'       => ['director'],
+                ],
+                [
+                    'text'       => 'Inscribir',
+                    'icon'       => 'graduation-cap',
+                    'url'        => '#',
+                    'role'       => 'director',
+                ],
+            ],
         ],
         [
-            'text'       => 'Listar Alumnos Registrados',
-            'icon'       => 'sort-alpha-asc',
-            'url'        => '#',
-            'role'       => ['director'],
+            'text'      => 'Ver Alumnos',
+            'icon'      => 'share',
+            'role'      => ['director'],
+            'submenu'   =>[
+                [
+                    'text'       => 'Registrados',
+                    'icon'       => 'sort-alpha-asc',
+                    'url'        => '#',
+                    'role'       => ['director'],
+                ],
+                [
+                    'text'       => 'Inscritos',
+                    'icon'       => 'sort-alpha-asc',
+                    'url'        => '#',
+                    'role'       => ['director'],
+                ],
+                [
+                    'text'       => 'Sin Inscripcion',
+                    'icon'       => 'sort-alpha-asc',
+                    'url'        => '#',
+                    'role'       => ['director'],
+                ],
+            ],
         ],
-        [
-            'text'       => 'Listar Alumnos Inscritos',
-            'icon'       => 'sort-alpha-asc',
-            'url'        => '#',
-            'role'       => ['director'],
-        ],
-        [
-            'text'       => 'Listar Alumnos sin Inscripcion',
-            'icon'       => 'sort-alpha-asc',
-            'url'        => '#',
-            'role'       => ['director'],
-        ],
+
+
+
+
+
+
 
 
     ],

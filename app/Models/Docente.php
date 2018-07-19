@@ -35,7 +35,7 @@ class Docente extends Model{
                   'centrotrabajo_id'=>'required',
 
                   'rfc'=>'required|unique:docentes|min:10|max:13',
-                  'curp'=>'required|unique:docentes|max:18',
+                  'curp'=>'required|unique:docentes|min:18|max:18',
                   'nombre'=>'required',
                   'appaterno'=>'required',
                   'apmaterno'=>'required',
@@ -51,6 +51,10 @@ class Docente extends Model{
      */
     public function user(){
         return $this->belongsTo('sice\User');
+    }
+
+    public function centrotrabajo(){
+        return $this->belongsTo('sice\Models\Centrotrabajo');
     }
 
     //********************************* Q U E R Y  S C O P E ****************************************
@@ -70,6 +74,9 @@ class Docente extends Model{
     }
     public function getCurpNombrecompletoAttribute(){
         return $this->curp.' - '.$this->nombre.' '.$this->appaterno.' '.$this->apmaterno;
+    }
+    public function getUbicacionCompletaAttribute(){
+         return $this->localidad.', '.$this->municipio;
     }
 
 }

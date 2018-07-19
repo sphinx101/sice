@@ -1,4 +1,4 @@
-<div class="col-md-4">
+
     <div class="box box-solid box-default">
         <div class="box-header with-border">
             <h3 class="box-title">Datos Personales</h3>
@@ -42,4 +42,3 @@
             </div>
         </div>
     </div>
-</div>

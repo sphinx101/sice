@@ -9,14 +9,14 @@
 namespace sice\Repositorios;
 
 
-use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Support\Facades\DB;
-use sice\Models\Docente;
+
 use sice\User;
 
 class DocenteRepo{
 
-   public function booUsuarioDocenteRegistrado($user_id){
+   public static function booUsuarioDocenteRegistrado($user_id){
        $existe=false;
        $user= User::find($user_id);
        if($user->docente!=null)

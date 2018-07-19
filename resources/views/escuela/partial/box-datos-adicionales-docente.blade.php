@@ -55,5 +55,6 @@
             <input type="hidden" name="actualizado" value="1">
 
         </div>
+        @include('escuela.partial.box-close-form-and-submit')
     </div>
 </div>

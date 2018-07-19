@@ -5,7 +5,7 @@ namespace sice\Http\Controllers\Escuela;
 use sice\Http\Requests\RequestCreateDocente;
 use sice\Http\Requests\RequestEditDocente;
 use sice\Models\Docente;
-use Illuminate\Http\Request;
+
 use sice\Http\Controllers\Controller;
 use sice\Repositorios\CentrotrabajoRepo;
 use sice\Repositorios\DocenteRepo;
@@ -52,6 +52,7 @@ class DocenteController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function store(RequestCreateDocente $request){
+
         $rs=$this->docenteRepo->store($request);
         if($rs['valor'])
             flash('Docente Registrado con Exito')->success()->important();

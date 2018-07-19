@@ -35,4 +35,7 @@ class User extends Authenticatable
     public function docente(){
         return $this->hasOne('sice\Models\Docente');
     }
+    public function alumno(){
+        return $this->hasOne('sice\Models\Alumno');
+    }
 }
