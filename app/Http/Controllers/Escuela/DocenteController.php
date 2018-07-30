@@ -2,6 +2,7 @@
 
 namespace sice\Http\Controllers\Escuela;
 
+use Illuminate\Http\Request;
 use sice\Http\Requests\RequestCreateDocente;
 use sice\Http\Requests\RequestEditDocente;
 use sice\Models\Docente;
@@ -30,8 +31,10 @@ class DocenteController extends Controller{
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
-        return 'index';
+    public function index(Request $request){
+
+
+        return view('escuela.docente.index');
     }
 
     /**
@@ -104,6 +107,49 @@ class DocenteController extends Controller{
      */
     public function destroy(Docente $docente)
     {
-        //
+
+        return response()->json(['success'=>'1','mensaje'=>'eliminado'],200);
     }
+
+
+    public function ObtenerDocentes(Request $request){
+
+
+               if(isset($request['curp']) || $request['curp']!=''){
+                   $docentes=$this->docenteRepo->retrieveDocentesByCurp($request['curp']);
+               }else{
+                   $docentes=$this->docenteRepo->allDocentes_paginate();
+               }
+
+
+            return [
+                'pagination' =>[
+                    'total'          => $docentes->total(),
+                    'current_page'   => $docentes->currentPage(),
+                    'per_page'       => $docentes->perPage(),
+                    'last_page'      => $docentes->lastPage(),
+                    'from'           => $docentes->firstItem(),
+                    'to'             => $docentes->lastItem(),
+                ],
+                'docentes' => $docentes
+            ];
+
+
+
+
+    }
+    /*public function findDocenteCurp(Request $request){
+        $docentes=$this->docenteRepo->retrieveDocentesByCurp($request['curp']);
+        return [
+            'pagination' =>[
+                'total'          => $docentes->total(),
+                'current_page'   => $docentes->currentPage(),
+                'per_page'       => $docentes->perPage(),
+                'last_page'      => $docentes->lastPage(),
+                'from'           => $docentes->firstItem(),
+                'to'             => $docentes->lastItem(),
+            ],
+            'docentes' => $docentes
+        ];
+    }*/
 }

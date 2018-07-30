@@ -164,7 +164,7 @@ return [
         ],
         [
             'text' => 'Datos Generales',
-            'url'  => "#",
+            'route'  => "docentes.index",
             'icon' => 'id-card',
             'role' => ['director','supervisor']
         ],

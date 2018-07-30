@@ -10,19 +10,34 @@ namespace sice\Repositorios;
 
 
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+use sice\Models\Docente;
 use sice\User;
 
 class DocenteRepo{
 
-   public static function booUsuarioDocenteRegistrado($user_id){
+    public function allDocentes_paginate(){
+        return Docente::orderBy('id','ASC')->paginate(10);
+    }
+
+    public function retrieveDocentesByCurp($curp){
+
+        if(Auth::user()->type=='supervisor'){
+            return Docente::where('docentes.curp', 'LIKE','%'.$curp.'%')->paginate(10);
+        }else{
+
+        }
+    }
+    public static function booUsuarioDocenteRegistrado($user_id){
        $existe=false;
        $user= User::find($user_id);
        if($user->docente!=null)
            $existe=true;
        return $existe;
    }
+
 
     public function store($data){
 

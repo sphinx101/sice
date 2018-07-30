@@ -13,13 +13,8 @@
 @section('content')
 
     <div class="row">
-
-        @include('escuela.partial.box-rfc-curp')
-
-        @include('escuela.partial.box-datos-adicionales-docente')
-
-
-
+       @include('escuela.partial.box-rfc-curp')
+       @include('escuela.partial.box-datos-adicionales-docente')
     </div>
     <!--  ./Row  -->
 
