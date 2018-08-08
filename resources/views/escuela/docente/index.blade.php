@@ -18,7 +18,7 @@
 @section('content')
 
     <div class="row" id="lista_docente">
-        <div class="box box-solid-box-default">
+        <div class="box box-solid box-default">
             <div class="box-header with-border">
                 <h3 class="box-title">Docentes Registrados </h3>
                 <div class="box-tools ">
@@ -55,9 +55,9 @@
                                <td v-text="docente.telefono"></td>
                                <td width="60px">
                                    <a href="#" class="btn btn-success btn-sm" role="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                   <a href="#" @click.prevent="editData(docente.id)" class="btn btn-warning btn-sm" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                   <a href="#" @click.prevent="deleteData(docente)" class="btn btn-danger btn-sm" role="button"><i class="fa fa-eraser" aria-hidden="true"></i></a>
-                                   {!! csrf_field() !!}
+                                   <a href="#" @click.prevent="editData(docente)" class="btn btn-warning btn-sm" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                   <a href="#" @click.prevent="questionDelete(docente)" class="btn btn-danger btn-sm" role="button"><i class="fa fa-eraser" aria-hidden="true"></i></a>
+
                                </td>
                            </tr>
                            </tbody>
@@ -85,7 +85,10 @@
                 </div>
             </div>
         </div>
+        @include('escuela.docente.modalDelete')
+        @include('escuela.docente.modalEdit')
     </div>
+
     <!--div id="lista_docente">
         <pre>
 
@@ -100,5 +103,6 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.5.1/vue-resource.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
     <script src="{{asset('js/docente/listar.js')}}"></script>
 @endpush

@@ -33,7 +33,7 @@ Route::group(['middleware'=>'auth'],function(){
 
 
         Route::group(['middleware'=>['role:supervisor|director']],function(){
-            Route::resource('docentes','DocenteController');
+            Route::resource('docentes','DocenteController',['except'=>['edit']]);
         });
         Route::group(['middleware'=>['role:supervisor']],function(){
             Route::get('docentes/create','DocenteController@create')->name('docentes.create');

@@ -6,6 +6,7 @@ var lista_docente=new Vue({
     el: '#lista_docente',
     created: function(){
           this.getDocentes();
+        toastr.options.progressBar = true;
     },
     data:{
         docentes:[],
@@ -19,6 +20,27 @@ var lista_docente=new Vue({
         },
         offset: 3,
         curp:'',
+        docente:'',
+
+        type_docente:'',
+        centrotrabajo_docente:'',
+
+        fillDocente:{
+            'rfc':'',
+            'curp':'',
+            'nombre':'',
+            'appaterno':'',
+            'apmaterno':'',
+            'domicilio':'',
+            'localidad':'',
+            'municipio':'',
+            'telefono':'',
+            'celular':'',
+            'email':'',
+
+        }
+
+
 
 
     },
@@ -49,6 +71,11 @@ var lista_docente=new Vue({
                    return pagesArray;
             },
 
+
+
+
+
+
     },
     methods:{
         getDocentes:function(page){
@@ -58,6 +85,7 @@ var lista_docente=new Vue({
                 this.docentes=response.data.docentes.data;
                 this.pagination=response.data.pagination;
             });
+
 
         },
         changePage:function (page) {
@@ -75,13 +103,101 @@ var lista_docente=new Vue({
             this.pagination.to=0;
             this.getDocentes();
         },
-        editData: function (id) {
-            alert(id);
-        },
-        deleteData: function (docente) {
-             this.$http.delete('docentes/'+docente).then(function(response){
+        questionDelete:function(docente){
+            this.docente=docente;
+            this.type_docente=docente.user.type;
+            this.centrotrabajo_docente=docente.centrotrabajo.nombre;
 
+            $('#modalDelete').modal('show');
+
+        },
+        editData: function (docente) {
+            this.docente=docente;
+            this.fillDocente.rfc=docente.rfc;
+            this.fillDocente.curp=docente.curp;
+            this.fillDocente.nombre=docente.nombre;
+            this.fillDocente.appaterno=docente.appaterno;
+            this.fillDocente.apmaterno=docente.apmaterno;
+            this.fillDocente.domicilio=docente.domicilio;
+            this.fillDocente.localidad=docente.localidad;
+            this.fillDocente.municipio=docente.municipio;
+            this.fillDocente.telefono=docente.telefono;
+            this.fillDocente.celular=docente.celular;
+            this.fillDocente.email=docente.user.email;
+            this.type_docente=docente.user.type;
+            this.centrotrabajo_docente=docente.centrotrabajo.nombre;
+
+
+            $('#modalEdit').modal('show');
+        },
+        deleteData: function () {
+            $('#modalDelete').modal('hide');
+
+             this.$http.delete('docentes/'+this.docente.id,{
+                 headers: {
+                     'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+                 },
+                 responseType:'json'
+             }).then(function(response){
+                // console.log(response);
+                 this.getDocentes();
+                 toastr.success(response.body.mensaje, 'Aviso')
+
+             }).catch(function(error){
+                 console.log('Error: '+error.body.mensaje);
+                 toastr.error(error.body.mensaje,'Error');
              });
+
+
+
+
+        },
+        updateData: function () {
+            this.$http({
+                'url':'docentes/'+this.docente.id,
+                'method':'patch',
+                'responseType':'json',
+                'headers':{
+                    'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+                },
+                'params':this.fillDocente
+            }).then(function(response){
+                 console.log(response);
+                 if(response.body.info.statusUpdate){
+                     this.getDocentes();
+                     this.docente='';
+                     this.fillDocente={
+                         'rfc':'',
+                         'curp':'',
+                         'nombre':'',
+                         'appaterno':'',
+                         'apmaterno':'',
+                         'domicilio':'',
+                         'localidad':'',
+                         'municipio':'',
+                         'telefono':'',
+                         'celular':'',
+                         'email':'',
+
+                     };
+                     this.centrotrabajo_docente='';
+                     this.type_docente='';
+                     $('#modalEdit').modal('hide');
+                     toastr.success(response.body.info.message);
+                 }else{
+                     toastr.info(response.body.info.message);
+                 }
+
+
+            }).catch(function(error) {
+                console.log(error);
+                if(error.body.http_code==422){
+                    console.log(error.body.errors.description);
+                    toastr.error('['+error.body.errors.type_error[1]+']'+error.body.errors.type_error[2],'Codigo Error['+error.body.errors.code_error+']');
+                }
+            })
+
+
         }
 
 

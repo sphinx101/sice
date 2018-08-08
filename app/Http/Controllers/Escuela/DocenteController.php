@@ -82,10 +82,10 @@ class DocenteController extends Controller{
      * @param  \sice\Models\Docente  $docente
      * @return \Illuminate\Http\Response
      */
-    public function edit(Docente $docente)
+    /*public function edit(Docente $docente)
     {
         return 'edit';
-    }
+    }*/
 
     /**
      * Update the specified resource in storage.
@@ -94,9 +94,10 @@ class DocenteController extends Controller{
      * @param  \sice\Models\Docente  $docente
      * @return \Illuminate\Http\Response
      */
-    public function update(RequestEditDocente $request, Docente $docente)
-    {
-        dd($docente);
+    public function update(RequestEditDocente $request, $docente_id){
+
+        $rs=$this->docenteRepo->update($request,$docente_id);
+        return response()->json($rs,$rs['http_code']);
     }
 
     /**
@@ -105,17 +106,23 @@ class DocenteController extends Controller{
      * @param  \sice\Models\Docente  $docente
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Docente $docente)
+    public function destroy($id)
     {
 
-        return response()->json(['success'=>'1','mensaje'=>'eliminado'],200);
+        $rs=$this->docenteRepo->delete($id);
+        if($rs['status']){
+            return response()->json($rs,200);
+        }
+
+        return response()->json($rs,$rs['code']);
+
     }
 
 
     public function ObtenerDocentes(Request $request){
 
 
-               if(isset($request['curp']) || $request['curp']!=''){
+               if(isset($request['curp']) && $request['curp']!=''){
                    $docentes=$this->docenteRepo->retrieveDocentesByCurp($request['curp']);
                }else{
                    $docentes=$this->docenteRepo->allDocentes_paginate();
