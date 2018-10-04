@@ -52,13 +52,13 @@
             <input v-model="fillDocente.email" class="form-control" name="email" type="text">
 
 
-            <span class="label label-success"><i class="fa fa-envelope-o margin-r-5"></i> Telefono </span>
+            <span class="label label-success"><i class="fa fa-phone margin-r-5"></i> Telefono </span>
 
             <input v-model="fillDocente.telefono" class="form-control" name="telefono" type="text">
 
 
 
-            <span class="label label-success"><i class="fa fa-envelope-o margin-r-5"></i> Celular </span>
+            <span class="label label-success"><i class="fa  fa-mobile margin-r-5"></i> Celular </span>
 
             <input v-model="fillDocente.celular" class="form-control" name="celular" type="text">
 

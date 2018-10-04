@@ -34,12 +34,13 @@ Route::group(['middleware'=>'auth'],function(){
 
         Route::group(['middleware'=>['role:supervisor|director']],function(){
             Route::resource('docentes','DocenteController',['except'=>['edit']]);
+
         });
         Route::group(['middleware'=>['role:supervisor']],function(){
             Route::get('docentes/create','DocenteController@create')->name('docentes.create');
             Route::post('docentes','DocenteController@store')->name('docentes.store');
             Route::delete('docentes/{docente}','DocenteController@destroy')->name('docentes.destroy');
-
+            Route::get('docentes/xct/docentesporescuela','DocenteController@viewDocentesPorEscuela')->name('docentes.xct.listar');
 
         });
 

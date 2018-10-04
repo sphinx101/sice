@@ -6,11 +6,11 @@ var lista_docente=new Vue({
     el: '#lista_docente',
     created: function(){
           this.getDocentes();
-        toastr.options.progressBar = true;
+          toastr.options.progressBar = true;
     },
     data:{
-        docentes:[],
-        pagination:{
+        docentes:[],                   //Array de docentes
+        pagination:{                   //Paginacion
                 'total': 0,
                 'current_page': 0,
                 'per_page': 0,
@@ -18,14 +18,14 @@ var lista_docente=new Vue({
                 'from': 0,
                 'to': 0
         },
-        offset: 3,
-        curp:'',
-        docente:'',
+        offset: 3,                     //Paginacion
+        curp:'',                       //Busqueda
+        docente:'',                    //docente seleccionado
 
-        type_docente:'',
-        centrotrabajo_docente:'',
+        type_docente:'',               //La funcion que realiza el docente (director,docente)
+        centrotrabajo_docente:'',      //centro de trabajo al que pertenece docente seleccionado
 
-        fillDocente:{
+        fillDocente:{                  //Datos a editar del docenten
             'rfc':'',
             'curp':'',
             'nombre':'',
@@ -39,9 +39,6 @@ var lista_docente=new Vue({
             'email':'',
 
         }
-
-
-
 
     },
     computed:{
@@ -70,11 +67,6 @@ var lista_docente=new Vue({
                    }
                    return pagesArray;
             },
-
-
-
-
-
 
     },
     methods:{

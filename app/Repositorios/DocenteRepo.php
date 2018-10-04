@@ -46,13 +46,49 @@ class DocenteRepo{
 
         }
     }
+
+    public function findDocente($id){
+        $rs=Docente::with('user')->with('centrotrabajo')->find($id);
+        return $rs;
+    }
+
     public static function booUsuarioDocenteRegistrado($user_id){
        $existe=false;
        $user= User::find($user_id);
        if($user->docente!=null)
            $existe=true;
        return $existe;
-   }
+    }
+
+    public function retrieveDocentesByCT(){
+          $docentes=Docente::join('centrotrabajos as ct','ct.id','=','docentes.centrotrabajo_id')
+                           ->orderBy('ct.id')
+                           ->select('ct.id as ct_id','ct.cct','ct.nombre as ct_nom','docentes.*')->get();
+          $data[][]='';
+          $i=-1;
+          $j=0;
+          $ct_temp=0;
+
+          foreach($docentes as $docente){
+              if($docente->ct_id !== $ct_temp){
+                  $i++;
+                  $data[$i][$j]['ct_id']=$docente->ct_id;
+                  $data[$i][$j]['docente']=$docente->nombre_completo;
+                  $data[$i][$j]['domicilio']=$docente->domicilio;
+                  $data[$i][$j]['municipio']=$docente->ubicacion_completa;
+
+              }else{
+                  $j++;
+                  //$data[$i][$j][]=$docente->ct_id;
+                  $data[$i][$j]['docente']=$docente->nombre_completo;
+                  $data[$i][$j]['domicilio']=$docente->domicilio;
+                  $data[$i][$j]['municipio']=$docente->ubicacion_completa;
+              }
+              $ct_temp=$docente->ct_id;
+          }
+          dd($data);
+    }
+
 
 
     public function store($data){

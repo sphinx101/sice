@@ -175,8 +175,8 @@ return [
             'role' => ['director']
         ],
         [
-            'text'=>'Listar Docentes por Escuela',
-            'url'=>'#',
+            'text'=>'Docentes por Escuela',
+            'route'=>'docentes.xct.listar',
             'icon'=>'home',
             'role'=>['supervisor'],
         ],

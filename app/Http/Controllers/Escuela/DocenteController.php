@@ -3,6 +3,8 @@
 namespace sice\Http\Controllers\Escuela;
 
 use Illuminate\Http\Request;
+
+
 use sice\Http\Requests\RequestCreateDocente;
 use sice\Http\Requests\RequestEditDocente;
 use sice\Models\Docente;
@@ -71,9 +73,12 @@ class DocenteController extends Controller{
      * @param  \sice\Models\Docente  $docente
      * @return \Illuminate\Http\Respons
      */
-    public function show(Docente $docente)
-    {
-        dd($docente);
+    public function show($id){
+
+        $docente=$this->docenteRepo->findDocente($id);
+
+        return view('escuela.docente.perfilDocente',compact('docente',$docente));
+
     }
 
     /**
@@ -115,6 +120,15 @@ class DocenteController extends Controller{
         }
 
         return response()->json($rs,$rs['code']);
+
+    }
+
+    public function viewDocentesPorEscuela(){
+        $this->docenteRepo->retrieveDocentesByCT();
+        return view('escuela.docente.Docentesporescuela');
+    }
+
+    public function ObtenerDocentesPorEscuela(){
 
     }
 

@@ -1,7 +1,7 @@
 @extends('adminlte::page')
 
 @push('css')
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
+   <!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css"-->
 @endpush
 
 @section('title','Datos Generales')
@@ -54,7 +54,7 @@
                                <td v-text="docente.celular"></td>
                                <td v-text="docente.telefono"></td>
                                <td width="60px">
-                                   <a href="#" class="btn btn-success btn-sm" role="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                   <a :href="'docentes/'+docente.id" class="btn btn-success btn-sm" role="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                    <a href="#" @click.prevent="editData(docente)" class="btn btn-warning btn-sm" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                    <a href="#" @click.prevent="questionDelete(docente)" class="btn btn-danger btn-sm" role="button"><i class="fa fa-eraser" aria-hidden="true"></i></a>
 
@@ -102,7 +102,7 @@
 @push('js')
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.5.1/vue-resource.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js" ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+    <!--script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js" ></script-->
+
     <script src="{{asset('js/docente/listar.js')}}"></script>
 @endpush
