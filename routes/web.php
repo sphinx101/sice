@@ -23,7 +23,8 @@ Route::group(['middleware'=>'auth'],function(){
 
     Route::group(['prefix'=>'escuela/personal/docentes', 'namespace'=>'Escuela'],function(){
 
-         Route::get('listarDocentes','DocenteController@ObtenerDocentes');//solicitud ajax via vue-resource par obtener los docentes
+        Route::get('listarDocentes', 'DocenteController@ObtenerDocentes');//solicitud ajax via vue-resource para obtener los docentes
+        Route::get('xct/listarDocentes', 'DocenteController@ObtenerDocentesPorEscuela');
          //Route::get('buscarDocente','DocenteController@findDocenteCurp');
     });
 
@@ -41,6 +42,7 @@ Route::group(['middleware'=>'auth'],function(){
             Route::post('docentes','DocenteController@store')->name('docentes.store');
             Route::delete('docentes/{docente}','DocenteController@destroy')->name('docentes.destroy');
             Route::get('docentes/xct/docentesporescuela','DocenteController@viewDocentesPorEscuela')->name('docentes.xct.listar');
+
 
         });
 

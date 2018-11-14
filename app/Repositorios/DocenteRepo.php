@@ -26,10 +26,20 @@ class DocenteRepo{
 
     public function allDocentes_paginate(){
        //return Docente::orderBy('id','ASC')->paginate(10);
-        return Docente::with('user')
-                      ->with('centrotrabajo')
-                      ->where('docentes.id','<>',\Auth::user()->docente->id)
-                      ->paginate(10);
+        if (\Auth::user()->type === 'director') {
+
+            return Docente::with('user')
+                ->with('centrotrabajo')
+                ->where('docentes.id', '<>', \Auth::user()->docente->id)
+                ->where('docentes.centrotrabajo_id', \Auth::user()->docente->centrotrabajo_id)
+                ->paginate(10);
+        } else {
+            return Docente::with('user')
+                ->with('centrotrabajo')
+                ->where('docentes.id', '<>', \Auth::user()->docente->id)
+                ->paginate(10);
+        }
+
 
     }
 
@@ -43,7 +53,12 @@ class DocenteRepo{
                           ->where('docentes.curp','LIKE','%'.$curp.'%')
                           ->paginate(10);
         }else{
-
+            return Docente::with('user')
+                ->with('centrotrabajo')
+                ->where('docentes.id', '<>', \Auth::user()->docente->id)
+                ->where('docentes.centrotrabajo_id', \Auth::user()->docente->centrotrabajo_id)
+                ->where('docentes.curp', 'LIKE', '%' . $curp . '%')
+                ->paginate(10);
         }
     }
 
@@ -60,11 +75,12 @@ class DocenteRepo{
        return $existe;
     }
 
+    //TODO Implementar vista de docentes por centro de trabajo para rol supervisor
     public function retrieveDocentesByCT(){
           $docentes=Docente::join('centrotrabajos as ct','ct.id','=','docentes.centrotrabajo_id')
                            ->orderBy('ct.id')
                            ->select('ct.id as ct_id','ct.cct','ct.nombre as ct_nom','docentes.*')->get();
-          $data[][]='';
+        $data = null;
           $i=-1;
           $j=0;
           $ct_temp=0;
@@ -72,7 +88,10 @@ class DocenteRepo{
           foreach($docentes as $docente){
               if($docente->ct_id !== $ct_temp){
                   $i++;
-                  $data[$i][$j]['ct_id']=$docente->ct_id;
+                  $j = 0;
+                  $data[$i][$j]['ct_nom'] = $docente->ct_nom;
+                  $j++;
+                  $data[$i][$j]['docente_id'] = $docente->id;
                   $data[$i][$j]['docente']=$docente->nombre_completo;
                   $data[$i][$j]['domicilio']=$docente->domicilio;
                   $data[$i][$j]['municipio']=$docente->ubicacion_completa;
@@ -80,13 +99,15 @@ class DocenteRepo{
               }else{
                   $j++;
                   //$data[$i][$j][]=$docente->ct_id;
+                  $data[$i][$j]['docente_id'] = $docente->id;
                   $data[$i][$j]['docente']=$docente->nombre_completo;
                   $data[$i][$j]['domicilio']=$docente->domicilio;
                   $data[$i][$j]['municipio']=$docente->ubicacion_completa;
               }
               $ct_temp=$docente->ct_id;
           }
-          dd($data);
+        //dd($data);
+        return $data;
     }
 
 

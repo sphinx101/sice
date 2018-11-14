@@ -124,11 +124,16 @@ class DocenteController extends Controller{
     }
 
     public function viewDocentesPorEscuela(){
-        $this->docenteRepo->retrieveDocentesByCT();
+        //$docentes=$this->docenteRepo->retrieveDocentesByCT();
         return view('escuela.docente.Docentesporescuela');
     }
 
     public function ObtenerDocentesPorEscuela(){
+        $escuelas = $this->docenteRepo->retrieveDocentesByCT();
+
+        return [
+            'escuelas' => $escuelas
+        ];
 
     }
 
