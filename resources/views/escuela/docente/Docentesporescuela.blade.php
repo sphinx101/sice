@@ -38,7 +38,8 @@
                                         <tbody>
                                         <tr v-for="docente in escuela">
                                             <td v-text="docente.docente_id"></td>
-                                            <td v-text="docente.docente"></td>
+                                            <td><a :href="'../'+docente.docente_id"><span
+                                                            v-text="docente.docente"></span></a></td>
                                             <td v-text="docente.domicilio"></td>
                                             <td v-text="docente.municipio"></td>
                                         </tr>
