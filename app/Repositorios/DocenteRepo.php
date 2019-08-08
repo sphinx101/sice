@@ -89,7 +89,7 @@ class DocenteRepo{
               if($docente->ct_id !== $ct_temp){
                   $i++;
                   $j = 0;
-                  $data[$i][$j]['ct_nom'] = $docente->ct_nom;
+                  $data[$i][$j]['ct_nom'] = $docente->ct_nom . ' - ' . $docente->cct;
                   $j++;
                   $data[$i][$j]['docente_id'] = $docente->id;
                   $data[$i][$j]['docente']=$docente->nombre_completo;
@@ -105,8 +105,10 @@ class DocenteRepo{
                   $data[$i][$j]['municipio']=$docente->ubicacion_completa;
               }
               $ct_temp=$docente->ct_id;
+
           }
         //dd($data);
+
         return $data;
     }
 

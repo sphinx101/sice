@@ -24,7 +24,7 @@
             </div>
             <div class="box-body">
                 <template v-for="escuela in escuelas">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="box box-solid box-default">
                             <div class="box-header with-border">
                                 <h3 class="box-title" v-text="escuela[0].ct_nom"></h3>

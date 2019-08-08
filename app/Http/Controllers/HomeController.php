@@ -35,8 +35,8 @@ class HomeController extends Controller
 
         $booDocenteRegistrado=$this->docenteRepo->booUsuarioDocenteRegistrado(Auth::id());
         $ccts=$this->centrotrabajoRepo->pluckCCT();
-        $booCrearUsuario=false;  //Bandera para crear un usuario nuevo cuando se registra un docente por medio del supervisor
-        if($booDocenteRegistrado) {
+        $booCrearUsuario = false;  //Bandera para crear  usuario ligado a un docente nuevo cuando este es registrado por medio del supervisor
+        if ($booDocenteRegistrado || Auth::user()->type === 'alumno') {
             $vista = 'home';
         }else{
             $mensaje='Es necesario registrar su informacion Personal para visualizar las opciones del Menu';

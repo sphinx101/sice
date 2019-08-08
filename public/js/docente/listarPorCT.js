@@ -11,8 +11,8 @@ var lista_docente_escuela = new Vue({
     },
     data: {
         docentes: [],
-        escuelas: [],
-        iNumEscuelas: '',
+        escuelas: []
+        //iNumEscuelas: null,
 
     },
     methods: {
@@ -22,9 +22,9 @@ var lista_docente_escuela = new Vue({
 
                 this.escuelas = response.data.escuelas;
 
-                this.iNumEscuelas = response.data.escuelas.length;
+                //this.iNumEscuelas = response.data.escuelas.length;
             });
-        },
+        }
 
     }
 });

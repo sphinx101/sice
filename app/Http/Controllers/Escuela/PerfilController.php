@@ -25,12 +25,17 @@ class PerfilController extends Controller{
         $vista='escuela.perfil.index';
         $booCrearUsuario=false;
         $ccts=$this->centrotrabajoRepo->pluckCCT();
-        if(!DocenteRepo::booUsuarioDocenteRegistrado(Auth::id())) {
-            $vista = 'escuela.perfil.create';
-            $mensaje='Es necesario registrar su informacion Personal para visualizar las opciones del Menu';
-            flash($mensaje)->warning()->important();
-        }
+        if (Auth::user()->type === 'alumno') {
+            $vista = 'escuela.alumno.perfil';                     // TODO: Implementar la vista de perfil de alumno  'escuela.alumno.perfil'
+        } else {
 
+            if (!DocenteRepo::booUsuarioDocenteRegistrado(Auth::id())) {
+                $vista = 'escuela.perfil.create';
+                $mensaje = 'Es necesario registrar su informacion Personal para visualizar las opciones del Menu';
+                flash($mensaje)->warning()->important();
+            }
+        }
+        //dd($vista);
         return view($vista,compact('ccts',$ccts,'booCrearUsuario',$booCrearUsuario));
 
     }

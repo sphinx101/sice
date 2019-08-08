@@ -83,5 +83,5 @@
 @stop
 
 @push('js')
-     <script> console.log('Hi!'); </script>
+
 @endpush
