@@ -243,7 +243,7 @@ class CreateSiceTables extends Migration
         Schema::dropIfExists('inscripciones');
         Schema::dropIfExists('aulas');
         Schema::dropIfExists('alumnos');
-        Schema::dropIfExists('grado');
+        Schema::dropIfExists('grados');
         Schema::dropIfExists('grupos');
         Schema::dropIfExists('turnos');
         Schema::dropIfExists('cicloescolares');
