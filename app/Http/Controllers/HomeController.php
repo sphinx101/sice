@@ -42,7 +42,7 @@ class HomeController extends Controller
             $mensaje='Es necesario registrar su informacion Personal para visualizar las opciones del Menu';
             flash($mensaje)->warning()->important();
         }
-
+        //dd($vista);
         return view($vista,compact('ccts',$ccts,'booCrearUsuario',$booCrearUsuario));
     }
 }

@@ -180,7 +180,7 @@ return [
             'icon'=>'home',
             'role'=>['supervisor'],
         ],
-        [
+        [   //'role' => 'director',
             'text'    => 'Multilevel',
             'icon'    => 'share',
 
@@ -188,11 +188,12 @@ return [
                 [
                     'text' => 'Level One',
                     'url'  => '#',
-
+                    //'role' => 'director',
                 ],
                 [
                     'text'    => 'Level One',
                     'url'     => '#',
+                    //'role' => 'director',
                     'submenu' => [
                         [
                             'text' => 'Level Two',
@@ -201,6 +202,7 @@ return [
                         [
                             'text'    => 'Level Two',
                             'url'     => '#',
+                            //'role' => 'director',
                             'submenu' => [
                                 [
                                     'text' => 'Level Three',
@@ -250,7 +252,7 @@ return [
                 [
                     'text'       => 'Registrados',
                     'icon'       => 'sort-alpha-asc',
-                    'url'        => '#',
+                    'route' => 'alumnos.index',
                     'role'       => ['director'],
                 ],
                 [
