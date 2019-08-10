@@ -42,6 +42,7 @@
                                                             v-text="docente.docente"></span></a></td>
                                             <td v-text="docente.domicilio"></td>
                                             <td v-text="docente.municipio"></td>
+
                                         </tr>
 
                                         </tbody>

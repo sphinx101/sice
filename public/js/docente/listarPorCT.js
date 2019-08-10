@@ -1,6 +1,3 @@
-/**
- * Created by sphinx on 11/10/18.
- */
 
 
 var lista_docente_escuela = new Vue({
@@ -11,8 +8,8 @@ var lista_docente_escuela = new Vue({
     },
     data: {
         docentes: [],
-        escuelas: []
-        //iNumEscuelas: null,
+        escuelas: [],
+        iNumEscuelas: null
 
     },
     methods: {
@@ -22,7 +19,7 @@ var lista_docente_escuela = new Vue({
 
                 this.escuelas = response.data.escuelas;
 
-                //this.iNumEscuelas = response.data.escuelas.length;
+                this.iNumEscuelas = response.data.escuelas.length;
             });
         }
 
