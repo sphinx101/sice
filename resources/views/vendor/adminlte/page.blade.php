@@ -73,8 +73,14 @@
 
                                             <p>
 
-                                                {{(Auth::user()->docente != null) ? ucwords(Auth::user()->docente->nombre_completo) :ucwords(Auth::user()->alumno->nombre_completo)}}
 
+                                                @if(Auth::user()->docente!=null)
+                                                    {{ucwords(Auth::user()->docente->nombre_completo)}}
+                                                @elseif(Auth::user()->alumno!=null)
+                                                    {{ucwords(Auth::user()->alumno->nombre_completo)}}
+                                                @else
+                                                    {{ucwords('usuario no registrado')}}
+                                                @endif
                                                 <small><strong>{{strtoupper(Auth::user()->type)}}</strong></small>
                                             </p>
                                         </li>
