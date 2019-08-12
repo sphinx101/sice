@@ -45,4 +45,8 @@ class AlumnoRepo{
         return ['mensaje'=>'Alumno Registrado con Exito','success'=>true];
     }
 
+    public function retrieveAlumnosTutores(){
+
+    }
+
 }

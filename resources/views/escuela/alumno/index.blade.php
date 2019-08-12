@@ -4,7 +4,7 @@
 
 @section('content_header')
 
-    <h1>Alumnos Registrados</h1>
+    <h1>Alumnos Pre-Inscritos</h1>
     <ol class="breadcrumb">
         <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Principal</a></li>
         <li><i class="fa fa-user-circle"></i> Alumnos</li>
@@ -56,10 +56,8 @@
                             </td>
                             <td>
 
-                                <a href="#" class="btn btn-warning btn-sm" role="button"><i
-                                            class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                <a href="#" class="btn btn-danger btn-sm" role="button"><i class="fa fa-eraser"
-                                                                                           aria-hidden="true"></i></a>
+                                <a href="#" class="btn btn-warning btn-sm" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                <a href="#" class="btn btn-danger btn-sm" role="button"><i class="fa fa-eraser" aria-hidden="true"></i></a>
                             </td>
                         </tr>
                         <tr>
@@ -89,5 +87,8 @@
 @stop
 
 @push('js')
-
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-paginate/3.6.0/vue-paginate.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+        <script src="{{asset('js/alumno/listarRegistrados.js')}}"></script>
 @endpush

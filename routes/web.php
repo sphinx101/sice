@@ -56,8 +56,10 @@ Route::group(['middleware'=>'auth'],function(){
              Route::post('alumnos','AlumnoController@store')->name('alumnos.store');
              Route::get('alumnos/{alumno}/edit','AlumnoController@edit')->name('alumnos.edit');
              Route::patch('alumnos/{alumno}','AlumnoController@update')->name('alumnos.update');
-             Route::delete('alumnos/{alumno}','AlumnoController@destroy')->name('alumnos.destroy');
-         });
+        });
+    });
+    Route::group(['prefix'=>'escuela/ajax/alumnos','namespace' => 'Escuela'],function(){
+        Route::get('alumnosregistrados','AlumnoController@ObtenerAlumnosRegistrados');
     });
 
 });

@@ -97,4 +97,13 @@ class AlumnoController extends Controller{
     {
         //
     }
+
+
+    public function ObtenerAlumnosRegistrados(Request $request){
+        return [
+              'alumno'=>[
+                  'nombre' => 'Santiago Victor Morfin'
+              ],
+        ];
+    }
 }
