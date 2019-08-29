@@ -3,8 +3,11 @@
 namespace sice\Http\Controllers\Escuela;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use PHPUnit\Util\Json;
 use sice\Http\Controllers\Controller;
 use sice\Http\Requests\RequestCreateAlumno;
+use sice\Http\Requests\RequestEditAlumno;
 use sice\Models\Alumno;
 use sice\Repositorios\AlumnoRepo;
 
@@ -70,10 +73,10 @@ class AlumnoController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Alumno $alumno)
+    /*public function edit(Alumno $alumno)
     {
         return 'formulario para editar informacion de algun alumno';
-    }
+    }*/
 
     /**
      * Update the specified resource in storage.
@@ -82,8 +85,10 @@ class AlumnoController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RequestCreateAlumno $request, Alumno $alumno)
+    public function update(RequestEditAlumno $request, $alumno_id)
     {
+        $rs = $this->alumnoRepo->update($request, $alumno_id);
+        return response()->json($rs, $rs['http_code']);
 
     }
 
@@ -100,10 +105,9 @@ class AlumnoController extends Controller{
 
 
     public function ObtenerAlumnosRegistrados(Request $request){
-        return [
-              'alumno'=>[
-                  'nombre' => 'Santiago Victor Morfin'
-              ],
-        ];
+        $centrotrabajo_id = Auth::user()->docente->centrotrabajo_id;
+        $alumnos = $this->alumnoRepo->retrieveAlumnosTutores($centrotrabajo_id);
+
+        return response()->json($alumnos);
     }
 }

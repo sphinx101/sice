@@ -20,14 +20,17 @@
                 <h3 class="box-title">Datos Generales</h3>
                 <div class="box-tools ">
                     <div class="form-group">
-                        <form action="#" method="GET" accept-charset="UTF-8" role="form" class="form-inline text-right">
+                        {{--<form action="#" method="GET" accept-charset="UTF-8" role="form" class="form-inline text-right">
 
                             <label for="lblcurp" class="sr-only">CURP</label>
-                            <input class="form-control" id="lblcurp" placeholder="CURP Alumno" name="curp" type="text">
-                            {{--<input class="btn btn-primary" type="submit" value="Buscar">--}}
+                            <input class="form-control" id="lblcurp" placeholder="CURP Alumno" name="curp" type="text" v-model="busqueda_curp">
+                            --}}{{--<input class="btn btn-primary" type="submit" value="Buscar">--}}{{--
                             <button class="btn btn-primary" type="submit">Busqueda</button>
                             <a href="#" class="btn btn-default" role="button">Mostrar Todos</a>
-                        </form>
+                        </form>--}}
+                        <label for="lblcurp" class="sr-only">CURP</label>
+                        <input class="form-control" id="lblcurp" placeholder="CURP Alumno" name="curp" type="search"
+                               v-model="busqueda_curp">
                     </div>
                 </div>
             </div>
@@ -42,46 +45,83 @@
                         <th>Localidad</th>
                         <th>Municipio</th>
                         <th>Padre/Tutor</th>
-                        <th width="140px">Acciones</th>
+                        <th width="140px"></th>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Santiago Victor Morfin</td>
-                            <td>VIAR780210HMNCRY09</td>
-                            <td>Camino Covarrubias, 680, Entre suelo 9º, 17090, Olivo de las Torres</td>
-                            <td>Sahuayo</td>
-                            <td>Sahuayo</td>
-                            <td><a href="#"><i class="fa fa-users"><span class="label label-success">Maria de los Angeles</span></i></a>
-                            </td>
+                        {{--<tbody>
+                        <tr v-for="alumno in busquedaCurp">
+                            <td v-text="alumno.id"></td>
+                            <td v-text="alumno.nombre+' '+alumno.appaterno+' '+alumno.apmaterno"></td>
+                            <td v-text="alumno.curp"></td>
+                            <td v-text="alumno.domicilio"></td>
+                            <td v-text="alumno.localidad"></td>
+                            <td v-text="alumno.municipio"></td>
+                            <template v-if="alumno.padretutores.length>0">
+                                <td v-for="tutor in alumno.padretutores">
+                                    <a href="#"><i class="fa fa-users"><span class="label label-success text-uppercase" v-text="tutor.nombre+' '+tutor.appaterno+' '+tutor.apmaterno"></span></i></a>
+
+                                </td>
+                            </template>
+                            <template v-else>
+                                <a href="#"><i class="fa fa-user-times"><span class="label label-danger text-uppercase">Sin Registrar</span></i></a>
+                            </template>
+
                             <td>
 
                                 <a href="#" class="btn btn-warning btn-sm" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                 <a href="#" class="btn btn-danger btn-sm" role="button"><i class="fa fa-eraser" aria-hidden="true"></i></a>
                             </td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Romina Victor Morfin</td>
-                            <td>VIMR780210HMNCRY09</td>
-                            <td>Camino Covarrubias, 680, Entre suelo 9º, 17090, Olivo de las Torres</td>
-                            <td>Jiquilpan</td>
-                            <td>Jiquilpan</td>
-                            <td><a href="#"><i class=" fa fa-users"><span
-                                                class="label label-success">Reynaldo</span></i></a></td>
-                            <td>
-                                <a href="#" class="btn btn-warning btn-sm" role="button"><i
-                                            class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                <a href="#" class="btn btn-danger btn-sm" role="button"><i class="fa fa-eraser"
-                                                                                           aria-hidden="true"></i></a>
 
-                            </td>
-                        </tr>
-                        </tbody>
+                        </tbody>--}}
+
+                        <paginate
+                                name="alumnos_paginados"
+                                :list="busquedaCurp"
+                                :per="10"
+                                tag="tbody"
+                        >
+                            <tr v-for="alumno in paginated('alumnos_paginados')">
+                                <td v-text="alumno.id"></td>
+                                <td v-text="alumno.nombre+' '+alumno.appaterno+' '+alumno.apmaterno"></td>
+                                <td v-text="alumno.curp"></td>
+                                <td v-text="alumno.domicilio"></td>
+                                <td v-text="alumno.localidad"></td>
+                                <td v-text="alumno.municipio"></td>
+                                <template v-if="alumno.padretutores.length>0">
+                                    <td v-for="tutor in alumno.padretutores">
+                                        <a href="#"><i class="fa fa-users"><span
+                                                        class="label label-success text-uppercase"
+                                                        v-text="tutor.nombre+' '+tutor.appaterno+' '+tutor.apmaterno"></span></i></a>
+
+                                    </td>
+                                </template>
+                                <template v-else>
+                                    <a href="#"><i class="fa fa-user-times"><span
+                                                    class="label label-danger text-uppercase">Sin Registrar</span></i></a>
+                                </template>
+
+                                <td>
+
+                                    <a href="#" @click.prevent="editData(alumno)" class="btn btn-warning btn-sm"
+                                       role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                    <a href="#" class="btn btn-danger btn-sm" role="button"><i class="fa fa-eraser"
+                                                                                               aria-hidden="true"></i></a>
+                                </td>
+                            </tr>
+                        </paginate>
+
                     </table>
+                    <paginate-links for="alumnos_paginados"
+                                    :limit="5"
+                                    :show-step-links="true"
+                                    :classes="{'ul': 'pagination'}"
+                                    :step-links="{next: 'Siguiente', prev: 'Anterior'}">
+
+                    </paginate-links>
                 </div>
             </div>
         </div>
+        @include('escuela.alumno.modalEdit')
     </div>
 
 @stop
@@ -90,5 +130,6 @@
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-paginate/3.6.0/vue-paginate.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+<!--script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.5.1/vue-resource.min.js"></script-->
         <script src="{{asset('js/alumno/listarRegistrados.js')}}"></script>
 @endpush

@@ -116,13 +116,14 @@ class CreateSiceTables extends Migration
               $table->integer('alumno_id')->unsigned();
               $table->foreign('alumno_id')->references('id')->on('alumnos')->onDelete('cascade')->onUpdate('cascade');//alumnos-asistencias
               $table->date('fecha');
-              $table->enum('asistio',['A','F','R']);
+              $table->enum('asistio', ['A', 'F', 'R', 'J']);
 
               $table->timestamps();
               $table->softDeletes();
           });
           Schema::create('padretutores',function(Blueprint $table){
               $table->increments('id');
+              $table->string('curp', 18);
               $table->string('nombre',20);
               $table->string('appaterno',20);
               $table->string('apmaterno',20);
@@ -130,6 +131,7 @@ class CreateSiceTables extends Migration
               $table->string('celular')->nullable();
               $table->string('domicilio');
               $table->string('localidad');
+              $table->string('municipio');
               $table->string('ocupacion');
               $table->string('escolaridad');
 

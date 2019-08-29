@@ -76,6 +76,7 @@ var lista_docente=new Vue({
 
                 this.docentes=response.data.docentes.data;
                 this.pagination=response.data.pagination;
+
             });
 
 

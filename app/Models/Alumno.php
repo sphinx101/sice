@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Alumno extends Model{
 
     protected $table='alumnos';
-    protected $touches=['centrotrabajo'];
+    protected $touches = ['centrotrabajo'];//actualizacion automatica de timestamps updated_at de centrotrabajo
 
     use SoftDeletes;
     protected $dates=['deleted_at'];
@@ -45,6 +45,16 @@ class Alumno extends Model{
     }
     public function user(){
         return $this->belongsTo('sice\User');
+    }
+
+    public function padretutores()
+    {
+        return $this->belongsToMany('sice\Models\Padretutor')->withTimestamps()->withPivot('parentesco_id');
+    }
+
+    public function parentescos()
+    {
+        return $this->belongsToMany('sice\Models\Parentesco', 'alumno_padretutor')->withTimestamps()->withPivot('padretutor_id');
     }
 
     /************************* MUTADORES Y ACCESORES **********************/
