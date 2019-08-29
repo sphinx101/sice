@@ -82,6 +82,7 @@ var lista_alumno=new Vue({
                 },
                 params: vu.fillAlumno
             }).then(function (response) {
+
                 if (response.data.info.statusUpdate) {
                     vu.ObtenerAlumnos();
                     vu.alumno = '';
@@ -101,11 +102,11 @@ var lista_alumno=new Vue({
                 } else {
                     toastr.info(response.data.info.message);
                 }
-            }).catch(function (error) {
-                console.log(error)
-                if (error.data.http_code == 422) {
-                    console.log(error.data.errors.description);
-                    toastr.error('[' + error.data.errors.type_error[1] + ']' + error.data.errors.type_error[2], 'Codigo Error[' + error.data.errors.code_error + ']');
+            }).catch(function (e) {
+
+                error = e.response.data;
+                if (error.http_code == 422) {
+                    toastr.error('[' + error.errors.type_error[1] + ']' + error.errors.type_error[2], 'Codigo Error[' + error.errors.code_error + ']');
                 }
 
             })
