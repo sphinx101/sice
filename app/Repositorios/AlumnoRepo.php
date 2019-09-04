@@ -111,6 +111,35 @@ class AlumnoRepo{
 
     }
 
+    public function delete($alumno_id)
+    {
+        $OK_HTTP = 200;
+        $FAIL_HTTP = 422;
+        $this->rs = [
+            'info' => [
+                'message' => '',
+                'statusUpdate' => '',
+            ],
+            'errors' => [
+                'description' => '',
+                'type_error' => '',
+                'code_error' => ''
+            ],
+            'http_code' => ''
+        ];
+        try {
+            DB::transaction(function () use ($alumno_id) {
+
+            });
+        } catch (QueryException $qEx) {
+
+        } catch (ModelNotFoundException $mEx) {
+
+        } catch (\Exception $e) {
+
+        }
+    }
+
     public function retrieveAlumnosTutores($centrotrabajo_id)
     {
 

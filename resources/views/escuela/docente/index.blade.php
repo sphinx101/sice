@@ -58,7 +58,8 @@
                                                class="fa fa-eye" aria-hidden="true"></i></a>
                                    <a href="#" @click.prevent="editData(docente)" class="btn btn-warning btn-sm"
                                       role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                   <a href="#" @click.prevent="questionDelete(docente)" class="btn btn-danger btn-sm"
+                                   <a v-if="docente.user.type==='supervisor'" href="#"
+                                      @click.prevent="questionDelete(docente)" class="btn btn-danger btn-sm"
                                       role="button"><i class="fa fa-eraser" aria-hidden="true"></i></a>
 
                                </td>

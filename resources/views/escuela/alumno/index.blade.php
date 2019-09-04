@@ -22,7 +22,7 @@
                     <div class="form-group">
                         {{--<form action="#" method="GET" accept-charset="UTF-8" role="form" class="form-inline text-right">
 
-                            <label for="lblcurp" class="sr-only">CURP</label>
+                            <label for="lblcurp" clas</template>s="sr-only">CURP</label>
                             <input class="form-control" id="lblcurp" placeholder="CURP Alumno" name="curp" type="text" v-model="busqueda_curp">
                             --}}{{--<input class="btn btn-primary" type="submit" value="Buscar">--}}{{--
                             <button class="btn btn-primary" type="submit">Busqueda</button>
@@ -104,8 +104,8 @@
 
                                     <a href="#" @click.prevent="editData(alumno)" class="btn btn-warning btn-sm"
                                        role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                    <a href="#" class="btn btn-danger btn-sm" role="button"><i class="fa fa-eraser"
-                                                                                               aria-hidden="true"></i></a>
+                                    <a href="#" @click.prevent="questionDelete(alumno)" class="btn btn-danger btn-sm"
+                                       role="button"><i class="fa fa-eraser" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                         </paginate>
@@ -122,6 +122,7 @@
             </div>
         </div>
         @include('escuela.alumno.modalEdit')
+        @include('escuela.alumno.modalDelete')
     </div>
 
 @stop

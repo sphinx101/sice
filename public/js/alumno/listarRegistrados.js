@@ -110,6 +110,25 @@ var lista_alumno=new Vue({
                 }
 
             })
+        },
+        questionDelete: function (alumno) {
+            this.alumno = alumno;
+            $('#modalDelete').modal('show');
+        },
+        deleteData: function () {
+            vu = this;
+            $('#modalDelete').modal('hide');
+            axios({
+                url: 'alumnos/' + vu.alumno.id,
+                method: 'delete',
+                responseType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
+                }
+            }).then(function (response) {
+                console.log(response.data.id);
+            })
+
         }
 
      }

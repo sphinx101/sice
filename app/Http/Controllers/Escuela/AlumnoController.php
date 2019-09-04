@@ -98,9 +98,11 @@ class AlumnoController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Alumno $alumno)
+    public function destroy($alumno)
     {
-        //
+        return response([
+            'id' => $alumno
+        ], 200);
     }
 
 
