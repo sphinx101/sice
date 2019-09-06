@@ -126,7 +126,15 @@ var lista_alumno=new Vue({
                     'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')
                 }
             }).then(function (response) {
-                console.log(response.data.id);
+
+                toastr.success(response.data.info.message);
+                vu.ObtenerAlumnos();
+
+            }).catch(function(e){
+                error = e.response.data;
+                if (error.http_code == 422) {
+                    toastr.error('[' + error.errors.type_error[1] + ']' + error.errors.type_error[2], 'Codigo Error[' + error.errors.code_error + ']');
+                }
             })
 
         }

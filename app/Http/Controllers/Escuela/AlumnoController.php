@@ -98,11 +98,10 @@ class AlumnoController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($alumno)
+    public function destroy($alumno_id)
     {
-        return response([
-            'id' => $alumno
-        ], 200);
+        $rs=$this->alumnoRepo->delete($alumno_id);
+        return response()->json($rs,$rs['http_code']);
     }
 
 
@@ -110,6 +109,6 @@ class AlumnoController extends Controller{
         $centrotrabajo_id = Auth::user()->docente->centrotrabajo_id;
         $alumnos = $this->alumnoRepo->retrieveAlumnosTutores($centrotrabajo_id);
 
-        return response()->json($alumnos);
+        return response()->json($alumnos,200);
     }
 }

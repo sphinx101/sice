@@ -71,9 +71,9 @@ class CreateSiceTables extends Migration
           Schema::create('alumnos',function(Blueprint $table){
               $table->increments('id');
               $table->integer('centrotrabajo_id')->unsigned();
-              $table->foreign('centrotrabajo_id')->references('id')->on('centrotrabajos')->onUpdate('cascade');
+              $table->foreign('centrotrabajo_id')->references('id')->on('centrotrabajos')->onUpdate('cascade')->onDelete('cascade');
               $table->integer('user_id')->unsigned();
-              $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
+              $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
               $table->string('curp',18)->unique();
               $table->string('nombre');
               $table->string('appaterno');

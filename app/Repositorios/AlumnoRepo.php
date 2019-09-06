@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Schema;
 use sice\Http\Requests\RequestCreateAlumno;
 use sice\Http\Requests\RequestEditAlumno;
 use sice\Models\Alumno;
+use sice\Models\Docente;
 use sice\User;
 
 class AlumnoRepo{
@@ -118,7 +119,7 @@ class AlumnoRepo{
         $this->rs = [
             'info' => [
                 'message' => '',
-                'statusUpdate' => '',
+                'statusDelete' => '',
             ],
             'errors' => [
                 'description' => '',
@@ -129,15 +130,31 @@ class AlumnoRepo{
         ];
         try {
             DB::transaction(function () use ($alumno_id) {
-
+                $alumno_user=Alumno::find($alumno_id)->user->delete();
+                $alumno=Alumno::find($alumno_id)->delete();
+                $this->rs['info']['message']='Registro Eliminado ';
+                $this->rs['info']['statusDelete']=true;
             });
+            $this->rs['http_code']=$OK_HTTP;
         } catch (QueryException $qEx) {
-
+            $this->rs['errors']['description']=$qEx->getMessage();
+            $this->ts['errors']['type_error']=$qEx->errorInfo;
+            $this->rs['errors']['code_error']=$qEx->getCode();
+            $this->rs['http_code']=$FAIL_HTTP;
         } catch (ModelNotFoundException $mEx) {
-
+            $this->rs['errors']['description']=$mEx->getMessage();
+            $this->ts['errors']['type_error']=$mEx->getModel();
+            $this->rs['errors']['code_error']=$mEx->getCode();
+            $this->rs['http_code']=$FAIL_HTTP;
         } catch (\Exception $e) {
-
+            $this->rs['errors']['description']=$eEx->getMessage();
+            $this->ts['errors']['type_error']=$e->getCode();
+            $this->rs['errors']['code_error']=$eEx->getCode();
+            $this->rs['http_code']=500;
         }
+
+        return $this->rs;
+
     }
 
     public function retrieveAlumnosTutores($centrotrabajo_id)
