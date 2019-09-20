@@ -13,10 +13,10 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use sice\Http\Requests\RequestCreateAlumno;
+
 use sice\Http\Requests\RequestEditAlumno;
 use sice\Models\Alumno;
-use sice\Models\Docente;
+
 use sice\User;
 
 class AlumnoRepo{
@@ -138,18 +138,18 @@ class AlumnoRepo{
             $this->rs['http_code']=$OK_HTTP;
         } catch (QueryException $qEx) {
             $this->rs['errors']['description']=$qEx->getMessage();
-            $this->ts['errors']['type_error']=$qEx->errorInfo;
+            $this->rs['errors']['type_error']=$qEx->errorInfo;
             $this->rs['errors']['code_error']=$qEx->getCode();
             $this->rs['http_code']=$FAIL_HTTP;
         } catch (ModelNotFoundException $mEx) {
             $this->rs['errors']['description']=$mEx->getMessage();
-            $this->ts['errors']['type_error']=$mEx->getModel();
+            $this->rs['errors']['type_error']=$mEx->getModel();
             $this->rs['errors']['code_error']=$mEx->getCode();
             $this->rs['http_code']=$FAIL_HTTP;
         } catch (\Exception $e) {
-            $this->rs['errors']['description']=$eEx->getMessage();
-            $this->ts['errors']['type_error']=$e->getCode();
-            $this->rs['errors']['code_error']=$eEx->getCode();
+            $this->rs['errors']['description']=$e->getMessage();
+            $this->rs['errors']['type_error']=$e->getCode();
+            $this->rs['errors']['code_error']=$e->getCode();
             $this->rs['http_code']=500;
         }
 

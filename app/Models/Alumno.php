@@ -57,6 +57,10 @@ class Alumno extends Model{
         return $this->belongsToMany('sice\Models\Parentesco', 'alumno_padretutor')->withTimestamps()->withPivot('padretutor_id');
     }
 
+    public function aulas(){
+        return $this->belongsToMany('sice\Models\Aula','inscripciones')->withTimestamps();
+    }
+
     /************************* MUTADORES Y ACCESORES **********************/
     public function getNombreCompletoAttribute(){
         return $this->nombre.' '.$this->appaterno.' '.$this->apmaterno;

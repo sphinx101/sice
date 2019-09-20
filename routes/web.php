@@ -49,17 +49,24 @@ Route::group(['middleware'=>'auth'],function(){
     });
     Route::group(['prefix'=>'escuela','namespace'=>'Escuela'],function(){
          Route::group(['middleware'=>['role:director|docente']],function(){
-             Route::resource('alumnos', 'AlumnoController', ['except' => ['edit']]);
+             Route::resource('alumnos', 'AlumnoController', ['except' => ['edit','show']]);
          });
          Route::group(['middleware'=>['role:director']],function(){
              Route::get('alumnos/create','AlumnoController@create')->name('alumnos.create');
              Route::post('alumnos','AlumnoController@store')->name('alumnos.store');
              //Route::get('alumnos/{alumno}/edit','AlumnoController@edit')->name('alumnos.edit');
              //Route::patch('alumnos/{alumno}','AlumnoController@update')->name('alumnos.update');
-        });
+         });
     });
     Route::group(['prefix'=>'escuela/ajax/alumnos','namespace' => 'Escuela'],function(){
         Route::get('alumnosregistrados','AlumnoController@ObtenerAlumnosRegistrados');
+    });
+
+    Route::group(['prefix'=>'escuela','namespace'=>'Escuela'],function(){
+         Route::group(['middleware'=>['role:director']],function(){
+              Route::get('ajax/aula/asignadas','AulaController@obtenerAulasAsignadas')->name('aula.asignadas');
+              Route::resource('aula','AulaController');
+         });
     });
 
 });

@@ -57,6 +57,10 @@ class Docente extends Model{
         return $this->belongsTo('sice\Models\Centrotrabajo');
     }
 
+    public function aulas(){
+        return $this->hasMany('sice\Models\Aula');
+    }
+
     //********************************* Q U E R Y  S C O P E ****************************************
     /**
      * @param $query

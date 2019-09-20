@@ -62,10 +62,10 @@ class AlumnoController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Alumno $alumno)
+    /*public function show(Alumno $alumno)
     {
         dd($alumno);
-    }
+    }*/
 
     /**
      * Show the form for editing the specified resource.

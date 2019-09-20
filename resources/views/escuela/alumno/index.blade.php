@@ -7,7 +7,7 @@
     <h1>Alumnos Pre-Inscritos</h1>
     <ol class="breadcrumb">
         <li><a href="{{route('home')}}"><i class="fa fa-dashboard"></i> Principal</a></li>
-        <li><i class="fa fa-user-circle"></i> Alumnos</li>
+        <li><i class="fa fa-user-circle"></i> Ver Alumnos</li>
         <li class="active">Registrados</li>
     </ol>
 @stop
@@ -38,14 +38,14 @@
                 <div class="table-responsive">
                     <table class="table table-hover table-sprite">
                         <thead>
-                        <th>Id</th>
-                        <th>Nombre</th>
-                        <th>CURP</th>
-                        <th width="250px">Domicilio</th>
-                        <th>Localidad</th>
-                        <th>Municipio</th>
-                        <th>Padre/Tutor</th>
-                        <th width="140px"></th>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>CURP</th>
+                            <th width="250px">Domicilio</th>
+                            <th>Localidad</th>
+                            <th>Municipio</th>
+                            <th>Padre/Tutor</th>
+                            <th width="140px"></th>
                         </thead>
                         {{--<tbody>
                         <tr v-for="alumno in busquedaCurp">

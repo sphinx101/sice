@@ -170,7 +170,7 @@ return [
         ],
         [
             'text' => 'Aulas Asignadas',
-            'url'  => '#',
+            'route'  => 'aula.index',
             'icon' => 'list-ol',
             'role' => ['director']
         ],

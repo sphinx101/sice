@@ -11,7 +11,7 @@ var lista_alumno=new Vue({
          toastr.options.progressBar = true;
      },
      data: {
-          alumnos:[],
+         alumnos:[],
          alumno: '',
          busqueda_curp: '',
          fillAlumno: {
