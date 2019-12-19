@@ -34,7 +34,7 @@
                             <th>Grupo</th>
                             <th>Turno</th>
                             <th># Alumnos</th>
-                            <th width="10px"></th>
+                            <th width="100px"></th>
                         </thead>
                        {{-- <tbody>
                             <tr v-for="aula in aulas">
@@ -76,6 +76,7 @@
                                 <td v-if="aula.turno.nom_turno==='vespertino'"><span v-text="aula.turno.nom_turno" class="label label-primary text-uppercase"></span></td>
                                 <td>29/30</td>
                                 <td>
+                                    <a href="#" @click.prevent="editData(aula)" class="btn btn-warning btn-sm" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                     <a href="#" @click.prevent="questionDelete(aula)" class="btn btn-danger btn-sm" role="button"><i class="fa fa-eraser" aria-hidden="true"></i></a>
                                 </td>
 
@@ -98,6 +99,7 @@
 
             </div>
         </div>
+        @include('escuela.aula.modalEdit')
         @include('escuela.aula.modalDelete')
     </div>
 @stop

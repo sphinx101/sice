@@ -37,6 +37,10 @@ var lista_aulas=new Vue({
                       vu.aulas=response.data;
                   });
           },
+          editData: function (aula) {
+
+              $('#modalEdit').modal('show');
+          },
           questionDelete: function(aula){
                this.aula_select=aula;
                this.docente=aula.docente.nombre+' '+aula.docente.appaterno+' '+aula.docente.apmaterno;
